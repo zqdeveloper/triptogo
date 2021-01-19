@@ -298,6 +298,9 @@ include_once(G5_SHOP_PATH.'/settle_naverpay.inc.php');
         #infowindow-content {
             display: none;
         }
+        #infowindow-content input {
+            min-width: 300px;
+        }
         #map #infowindow-content {
             display: inline;
         }
