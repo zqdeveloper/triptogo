@@ -1739,10 +1739,9 @@ if (!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false
                         <div id="map" style="width:100%;height:300px;"></div>
 
                         <div id="infowindow-content">
-                            <input style="outline: transparent;border: none;" id="place-name" class="title" name="place-name" value="<?php echo $write['place-name']; ?>"/><br />
-<!--                            <strong>Place ID:</strong>-->
-                            <input type="hidden" id="place-id" name="place-id" value="<?php echo $write['place-id']; ?>"/><br/>
-                            <input style="outline: transparent;border: none;" id="place-address" name="place-address" value="<?php echo $write['place-address'];?>"/>
+                            <input style="outline: transparent;border: none;" id="place-name" class="title" name="place-name" value="<?php echo $it['it_1'];?>"/><br />
+                            <input type="hidden" id="place-id" name="place-id" value="<?php echo $it['it_4']; ?>"/><br/>
+                            <input style="outline: transparent;border: none;" id="place-address" name="place-address" value="<?php echo $it['it_8'];?>"/>
                         </div>
                         <script>
                             function initMap() {
@@ -1764,9 +1763,9 @@ if (!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false
                                 autocomplete.setFields(["place_id", "geometry", "name",'formatted_address']);
                                 map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
                                 const infowindow = new google.maps.InfoWindow();
+                                const infowindowContent = document.getElementById("infowindow-content");
+                                infowindow.setContent(infowindowContent);
                                 autocomplete.addListener("place_changed", () => {
-                                    const infowindowContent = document.getElementById("infowindow-content");
-                                    infowindow.setContent(infowindowContent);
                                     infowindow.close();
                                     const place = autocomplete.getPlace();
                                     if (!place.geometry) {
@@ -1803,9 +1802,7 @@ if (!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false
                                     it_2.value = marker.getPosition().lat();
                                     it_3.value = marker.getPosition().lng();
                                 });
-                                if (sample4_jibunAddress.value!='') {
-                                    infowindowContent.children.namedItem("place-name").value = sample4_jibunAddress.value;
-                                    infowindowContent.children.namedItem("place-address").value = sample4_jibunAddress.value;
+                                if (it_1.value!='') {
                                     infowindow.open(map, marker);
                                 }
                             }
@@ -1842,6 +1839,9 @@ if (!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false
 
                             #infowindow-content {
                                 display: none;
+                            }
+                            #infowindow-content input {
+                                min-width: 350px;
                             }
 
                             #map #infowindow-content {
