@@ -257,9 +257,15 @@ include_once(G5_SHOP_PATH.'/settle_naverpay.inc.php');
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <input  type="hidden" value="<?php echo get_text($it['it_8']); ?>" id="placeName"/>
     <div id="map" style="width:100%;height:300px;"></div>
+    <div id="infowindow-content">
+        <input style="border: none;outline: transparent;" id="place-name" class="title" name="place-name" value="<?php echo $it['it_1']; ?>"/><br/>
+        <input style="border: none;outline: transparent;" id="place-id" name="place-id" type="hidden"/><br/>
+        <input style="border: none;outline: transparent;" id="place-address" name="place-address" value="<?php echo $it['it_8']; ?>"/>
+    </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1_JwwLDgIU_joX06TBJrI4BN2msur5Xg&callback=initMap&libraries=places&v=weekly" defer></script>
         <script>
             function initMap() {
+                const placeName = document.getElementById("placeName")
                 const uluru = { lat: <?php echo $it['it_2']!= '' ? $it['it_2']: 12.97;?>, lng: <?php echo $it['it_3'] ? $it['it_3']: 77.59 ; ?>}
                 console.log(uluru);
                 // The map, centered at Uluru
@@ -272,11 +278,30 @@ include_once(G5_SHOP_PATH.'/settle_naverpay.inc.php');
                     position: uluru,
                     map: map,
                 });
-                const infowindow = new google.maps.InfoWindow();
-                infowindow.setContent(document.getElementById("placeName").value);
-                infowindow.open(map, marker);
+                if (placeName!='') {
+                    const infowindow = new google.maps.InfoWindow();
+                    const infowindowContent = document.getElementById("infowindow-content");
+                    infowindow.setContent(infowindowContent);
+                    //infowindowContent.children.namedItem("place-name").value = placeName.value;
+                    //infowindowContent.children.namedItem("place-address").value = placeName.value;
+                    infowindow.open(map, marker);
+                }
             }
         </script>
+    <style>
+        #map {
+            height: 100%;
+        }
+        .title {
+            font-weight: bold;
+        }
+        #infowindow-content {
+            display: none;
+        }
+        #map #infowindow-content {
+            display: inline;
+        }
+    </style>
 
     <!--    map api-->
 
