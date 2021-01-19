@@ -169,6 +169,11 @@ add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">
             <!--     map api       -->
             <div>
                 <td colspan="2" class="cont_td">
+                    <div id="infowindow-content">
+                        <input style="border: none;outline: transparent;" id="place-name" class="title" name="place-name" value="<?php echo $view['placeName']; ?>"/><br/>
+                        <input style="border: none;outline: transparent;" id="place-id" name="place-id" type="hidden" value="<?php echo $view['placeId']?>"/><br/>
+                        <input style="border: none;outline: transparent;" id="place-address" name="place-address" value="<?php echo $view['wr_3']; ?>"/>
+                    </div>
                     <div style="background-color:#f9f9f9; width:100%; margin-top:5px; height:330px; border-radius:4px;" id="map"></div>
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1_JwwLDgIU_joX06TBJrI4BN2msur5Xg&callback=initMap&libraries=places&v=weekly" defer></script>
                     <script>
@@ -184,11 +189,28 @@ add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">
                                 position: uluru,
                                 map: map,
                             });
-                            const infowindow = new google.maps.InfoWindow();
-                            infowindow.setContent(document.getElementById("placeName").value);
-                            infowindow.open(map, marker);
+                            if (placeName!='') {
+                                const infowindow = new google.maps.InfoWindow();
+                                const infowindowContent = document.getElementById("infowindow-content");
+                                infowindow.setContent(infowindowContent);
+                                infowindow.open(map, marker);
+                            }
                         }
                     </script>
+                    <style>
+                        .title {
+                            font-weight: bold;
+                        }
+                        #infowindow-content {
+                            display: none;
+                        }
+                        #infowindow-content input {
+                            min-width: 300px;
+                        }
+                        #map #infowindow-content {
+                            display: inline;
+                        }
+                    </style>
                 </td>
             </div>
             <!--    map api        -->

@@ -161,9 +161,8 @@ add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">
                      id="map"></div>
                 <div id="infowindow-content">
                     <input style="border: none;outline: transparent;" id="place-name" class="title" name="place-name" value="<?php echo $write['placeName']; ?>"/><br/>
-                    <!--                    <strong>Place ID:</strong>-->
                     <input style="border: none;outline: transparent;" id="place-id" name="place-id" value="<?php echo $write['place-id']; ?>" type="hidden"/><br/>
-                    <input style="border: none;outline: transparent;" id="place-address" name="place-address" value="<?php echo $write['place-address']; ?>"/>
+                    <input style="border: none;outline: transparent;" id="place-address" name="wr_3" value="<?php echo $write['wr_3']; ?>"/>
                 </div>
                 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1_JwwLDgIU_joX06TBJrI4BN2msur5Xg&callback=initMap&libraries=places&v=weekly"
@@ -229,8 +228,6 @@ add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">
                         });
                         console.log(input.value != '');
                         if (input.value!='') {
-                            infowindowContent.children.namedItem("place-name").value = input.value;
-                            infowindowContent.children.namedItem("place-address").value = input.value;
                             infowindow.open(map, marker);
                         }
                     }

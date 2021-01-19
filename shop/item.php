@@ -282,8 +282,6 @@ include_once(G5_SHOP_PATH.'/settle_naverpay.inc.php');
                     const infowindow = new google.maps.InfoWindow();
                     const infowindowContent = document.getElementById("infowindow-content");
                     infowindow.setContent(infowindowContent);
-                    //infowindowContent.children.namedItem("place-name").value = placeName.value;
-                    //infowindowContent.children.namedItem("place-address").value = placeName.value;
                     infowindow.open(map, marker);
                 }
             }
