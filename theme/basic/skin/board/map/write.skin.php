@@ -147,7 +147,30 @@ add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">
                 } ?>" id="wr_link<?php echo $i ?>" class="frm_input full_input" size="50">
             </div>
         <?php } ?>
-
+        <div class="write_div" style="position: relative;">
+            <tr>
+                <th scope="row"><label for="wr_tags_input">相关商品</label></th>
+                <td>
+                    <input type="button" value="相关商品" id="wr_4_button" style="background-color: red;border-radius: 2px; outline: none;min-width: 30px;min-height: 5px;
+border: 0 solid transparent;padding: 4px 10px;color: white;" onclick="showGoods();">
+                    <input type="hidden" name="wr_4" id="wr_4" value="<?php echo $it['wr_4'];?>">
+                </td>
+            </tr>
+            <div style="position: absolute; top: 0;right: 0;width: 400px;height: 0;background: white;z-index: 999;overflow-y: scroll;box-shadow: grey 0 0px 0px 0px;" id="shops">
+                <?php
+            echo '<table border="0" width="100%">';
+            $table = 'from  g5_shop_item';
+                $sql = " select *
+                {$table} ";
+                $result = sql_query($sql);
+                for ($i=0; $row=sql_fetch_array($result); $i++) {
+                    $id = $row['it_id'];
+                    echo "<tr><td>{$row['it_name']}</td> " . "<td text-align='right'><input type='button' value='关联' style='outline: none;border-radius: 2px;border: 0 solid transparent;' onclick='addShopToWrite($id)'/></td> " . "</tr>";
+                }
+            echo '</table>';
+            ?>
+            </div>
+        </div>
         <!--map-->
         <!-- API { -->
         <tr>
@@ -277,6 +300,7 @@ add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">
         <!--map-->
 
 
+
         <?php for ($i = 0; $is_file && $i < $file_count; $i++) { ?>
             <div class="bo_w_flie write_div">
                 <div class="file_wr write_div">
@@ -331,7 +355,6 @@ add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">
                 check_byte("wr_content", "char_count");
             });
         });
-
         <?php } ?>
         function html_auto_br(obj) {
             if (obj.checked) {
@@ -398,6 +421,21 @@ add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">
             document.getElementById("btn_submit").disabled = "disabled";
 
             return true;
+        }
+
+        function showGoods() {
+            let shop = document.getElementById('shops');
+            shop.style.boxShadow = "grey 0 5px 5px 1px";
+            shop.style.height = 200+'px';
+
+        }
+        function addShopToWrite(val) {
+            let shop = document.getElementById('shops');
+            shop.style.boxShadow = "grey 0 0px 0px 0px";
+            shop.style.height = 0;
+            let elementById = document.getElementById('wr_4');
+            elementById.value = val
+
         }
     </script>
 </section>

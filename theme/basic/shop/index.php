@@ -29,26 +29,26 @@ include_once(G5_THEME_SHOP_PATH.'/shop.head.php');
     $options['bold'] = 1; // 볼드체(bold) - (1:볼드체 0:일반)
     $options['caption'] = 0;    // 캡션(0:캡젼없음, 1:캡션숨김, 2:일반캡션, 3:호버캡션)
     $options['date'] = 0;     // 날짜출력(1:출력 0:숨김)
-    
-    
+
+    //展示文章
     echo latest('theme/pic-card-news-more', 'review', 100, 20, 0, $options);
-    //상품이미지
-                $list = new item_list();
-                $list->set_type('1','2','3','4');
-                $list->set_list_mod(4);
-                $list->set_list_row(2);
-                $list->set_img_size(500, 500);
-                $list->set_list_skin(G5_SHOP_SKIN_PATH.'/list.10.skin.php');
-                $list->set_view('it_img', true);
-                $list->set_view('it_id', false);
-                $list->set_view('it_name', true);
-                $list->set_view('it_basic', true);
-                $list->set_view('it_cust_price', true);
-                $list->set_view('it_price', true);
-                $list->set_view('it_icon', true);
-                $list->set_view('sns', false);
-                $list->set_order_by('it_sum_qty DESC');
-                echo $list->run();
+    //상품이미지//商品展示
+    $list = new item_list();
+    $list->set_type('1','2','3','4');
+    $list->set_list_mod(4);
+    $list->set_list_row(2);
+    $list->set_img_size(500, 500);
+    $list->set_list_skin(G5_SHOP_SKIN_PATH.'/list.10.skin.php');
+    $list->set_view('it_img', true);
+    $list->set_view('it_id', false);
+    $list->set_view('it_name', true);
+    $list->set_view('it_basic', true);
+    $list->set_view('it_cust_price', true);
+    $list->set_view('it_price', true);
+    $list->set_view('it_icon', true);
+    $list->set_view('sns', false);
+    $list->set_order_by('it_sum_qty DESC');
+    echo $list->run();
     ?>
     
     <!-- } 사진 최신글2 끝 -->

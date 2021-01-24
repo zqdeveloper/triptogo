@@ -88,7 +88,6 @@ class FileCache
             unlink( $cache_file_path );
             return FALSE;
         }
-
 		return $data;
 	}
 

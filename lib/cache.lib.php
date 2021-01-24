@@ -32,7 +32,6 @@ function g5_cache_secret_key(){
 
 function g5_latest_cache_data($bo_table, $cache_list=array(), $find_wr_id=0){
     static $cache = array();
-
     if( $bo_table && $cache_list && ! isset($cache[$bo_table]) ){
         foreach( (array) $cache_list as $wr ){
             if( empty($wr) || ! isset($wr['wr_id']) ) continue;

@@ -148,6 +148,9 @@ if (!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false
     <input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
     <input type="hidden" name="stx" value="<?php echo $stx; ?>">
     <input type="hidden" name="page" value="<?php echo $page; ?>">
+    <input type="hidden" name="wr_id" value="<?php echo $wr_id;?>"
+    <input type="hidden" name="w" value="<?php echo $w ?>">
+    <input type="hidden" name="bo_table" value="<?php echo 'review' ?>">
 
     <section id="anc_sitfrm_cate">
         <h2 class="h2_frm">상품분류</h2>
@@ -1306,7 +1309,6 @@ if (!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false
         </script>
     </section>
 
-
     <section id="anc_sitfrm_img">
         <h2 class="h2_frm">이미지</h2>
         <?php echo $pg_anchor; ?>
@@ -1696,24 +1698,19 @@ if (!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false
                     <col class="grid_3">
                 </colgroup>
                 <tbody>
-                <?php for ($i = 4; $i <= 10; $i++) { ?>
+                <?php for ($i = 6; $i <= 10; $i++) { ?>
                     <tr>
                         <th scope="row">여분필드<?php echo $i ?></th>
                         <td class="td_extra">
                             <label for="it_<?php echo $i ?>_subj">여분필드 <?php echo $i ?> 제목</label>
-                            <input type="text" name="it_<?php echo $i ?>_subj" id="it_<?php echo $i ?>_subj"
-                                   value="<?php echo get_text($it['it_' . $i . '_subj']) ?>" class="frm_input">
+                            <input type="text" name="it_<?php echo $i ?>_subj" id="it_<?php echo $i ?>_subj" value="<?php echo get_text($it['it_' . $i . '_subj']) ?>" class="frm_input">
                             <label for="it_<?php echo $i ?>">여분필드 <?php echo $i ?> 값</label>
-                            <input type="text" name="it_<?php echo $i ?>"
-                                   value="<?php echo get_text($it['it_' . $i]) ?>" id="it_<?php echo $i ?>"
-                                   class="frm_input">
+                            <input type="text" name="it_<?php echo $i ?>" value="<?php echo get_text($it['it_' . $i]) ?>" id="it_<?php echo $i ?>" class="frm_input">
                         </td>
                         <td class="td_grpset">
-                            <input type="checkbox" name="chk_ca_<?php echo $i ?>" value="1"
-                                   id="chk_ca_<?php echo $i ?>">
+                            <input type="checkbox" name="chk_ca_<?php echo $i ?>" value="1" id="chk_ca_<?php echo $i ?>">
                             <label for="chk_ca_<?php echo $i ?>">분류적용</label>
-                            <input type="checkbox" name="chk_all_<?php echo $i ?>" value="1"
-                                   id="chk_all_<?php echo $i ?>">
+                            <input type="checkbox" name="chk_all_<?php echo $i ?>" value="1" id="chk_all_<?php echo $i ?>">
                             <label for="chk_all_<?php echo $i ?>">전체적용</label>
                         </td>
                     </tr>
@@ -1722,12 +1719,11 @@ if (!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false
                 <!-- =============================================================2018-11-05============================================================================= -->
 
                 <tr>
-                    <input  type="hidden" id="it_1" name="it_1" value="<?php echo $it['it_1'];?>"/>
-                    <input  type="hidden" id="it_2" name="it_2" value="<?php echo $it['it_2'];?>"/>
-                    <input  type="hidden" id="it_3" name="it_3" value="<?php echo $it['it_3'];?>"/>
                     <th scope="row">여행상품 위치선택</th>
                     <td style="margin-right:5px;width:130px">
-
+                        <input  type="hidden" id="it_1" name="it_1" value="<?php echo $it['it_1'];?>"/>
+                        <input  type="hidden" id="it_2" name="it_2" value="<?php echo $it['it_2'];?>"/>
+                        <input  type="hidden" id="it_3" name="it_3" value="<?php echo $it['it_3'];?>"/>
                         <input type="hidden" name="it_8_subj" id="sample4_postcode" value="<?php echo get_text($it['it_8_subj']) ?>" class="frm_input" size="6">
                         <input type="hidden" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
                         <!--기본주소 --><input type="text" name="it_8" value="<?php echo get_text($it['it_8']) ?>" id="sample4_roadAddress" class="frm_input" size="50"><br>
@@ -1908,7 +1904,25 @@ if (!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false
                 </script>
 
                 <!-- =============================================================2018-11-05============================================================================= -->
+                <!-- == 新增加的输入标签 ==-->
+                <tr>
+                    <th scope="row"><label for="wr_tags_input">태그/TAG</label></th>
+                    <td>
+                        <input type="text" name="it_4" id="wr_tags_input" class="frm_input" size="50" value="<?php echo $it['it_4']?>">
+                        <p style="margin:5px 0 0 0;">입력 예) 컴프,애드센스,애드포스트</p>
+                    </td>
+                </tr>
+                <!-- == 是否是海外配送商品 ==-->
+                <tr>
+                    <th scope="row"><label for="wr_tags_input">해외 배 송</label></th>
+                    <td>
 
+                        <input type="checkbox" name="it_5" id="it_5" class="frm_input" size="50" <?php  if ($it['it_5']== 'on') {
+                            echo 'checked';
+                        }?>>
+                        <p style="margin:5px 0 0 0;">해외 배 송</p>
+                    </td>
+                </tr>
                 <?php if ($w == "u") { ?>
                     <tr>
                         <th scope="row">입력일시</th>
@@ -1929,6 +1943,7 @@ if (!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false
             </table>
         </div>
     </section>
+
 
     <div class="btn_fixed_top">
         <a href="./itemlist.php?<?php echo $qstr; ?>" class="btn btn_02">목록</a>

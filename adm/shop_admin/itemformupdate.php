@@ -511,9 +511,6 @@ if($supply_count) {
 
     sql_query($sql);
 }
-$it_1 = $_POST['it_1'];
-$it_2 = $_POST['it_2'];
-$it_3 = $_POST['it_3'];
 // 동일 분류내 상품 동일 옵션 적용
 $ca_fields = '';
 if(is_checked('chk_ca_it_skin'))                $ca_fields .= " , it_skin = '$it_skin' ";
@@ -612,9 +609,6 @@ if(is_checked('chk_all_8'))                      $all_fields .= " , it_8_subj = 
 if(is_checked('chk_all_9'))                      $all_fields .= " , it_9_subj = '$it_9_subj', it_9 = '$it_9' ";
 if(is_checked('chk_all_10'))                     $all_fields .= " , it_10_subj = '$it_10_subj', it_10 = '$it_10' ";
 
-$it_1 = $_POST['it_1'];
-$it_2 = $_POST['it_2'];
-$it_3 = $_POST['it_3'];
 if($all_fields) {
     sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$all_fields} ");
 }
