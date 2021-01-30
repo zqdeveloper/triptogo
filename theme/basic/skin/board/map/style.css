@@ -353,3 +353,9 @@ box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1)}
 .title {font-weight: bold;}
 #infowindow-content {display: none;}
 #map #infowindow-content {display: inline;}
+div.map-wrapper {
+    background: red;
+    height: 400px !important;
+    width: 200px;
+    z-index: 999;
+}
