@@ -138,7 +138,28 @@ add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">
         </section>
         <!-- } 관련링크 끝 -->
     <?php } ?>
-
+    <?php if (isset($view['wr_4'])) { ?>
+        <section id="bo_v_link" style="height: 100px; box-shadow: lightgrey 1px 1px 3px 3px; border-radius: 5px;border: 1px solid lightgrey;">
+            <div style="display: flex;flex-flow: row nowrap;align-items: center;justify-content: center;">
+                <?php
+                $table = 'from  g5_shop_item';
+                $sql = " select *
+                {$table} where it_id=".$view['wr_4'];
+                $result = sql_query($sql);
+                for ($i=0; $row=sql_fetch_array($result); $i++) {
+                    $item_link_href = shop_item_url($row['it_id']);
+                    ?>
+                <div style="flex: 1">
+                    <img style="float: left;margin-right: 30px;outline: none;border: 0 solid transparent;vertical-align: middle;" src="<?php echo G5_DATA_URL.'/item/'.$row['it_id']."/thumb-ti155t000386_500x500.jpg";?>" alt="" width="100px" height="100px">
+                    <div style="line-height: 100px;padding-left: 100px;"><?php echo $row['it_name'];?></div>
+                </div>
+                <div style="text-align: center;vertical-align: middle;line-height: 100px;margin-right: 10px;">
+                    <a href="<?php echo $item_link_href;?>" style="text-decoration: none;list-style: none;"><button style="outline: none;border: 1px transparent solid; background: red;color: white;text-align: center;line-height: 30px;border-radius: 15px;min-width: 100px;">点击查看</button></a>
+                </div>
+                <?php } ?>
+            </div>
+        </section>
+    <?php } ?>
     <section id="bo_v_atc">
         <h2 id="bo_v_atc_title">본문</h2>
         <div id="bo_v_share">
@@ -165,20 +186,27 @@ add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">
         <!-- 본문 내용 시작 { -->
 
         <div id="bo_v_con"><?php echo get_view_thumbnail($view['content']); ?>
-            <input style="display: none;" value="<?php echo $view['placeName'];?>" id="placeName">
+            <input style="display: none;" value="<?php echo $view['placeName']; ?>" id="placeName">
             <!--     map api       -->
             <div>
                 <td colspan="2" class="cont_td">
                     <div id="infowindow-content">
-                        <input style="border: none;outline: transparent;" id="place-name" class="title" name="place-name" value="<?php echo $view['placeName']; ?>"/><br/>
-                        <input style="border: none;outline: transparent;" id="place-id" name="place-id" type="hidden" value="<?php echo $view['placeId']?>"/><br/>
-                        <input style="border: none;outline: transparent;" id="place-address" name="place-address" value="<?php echo $view['wr_3']; ?>"/>
+                        <input style="border: none;outline: transparent;" id="place-name" class="title"
+                               name="place-name" value="<?php echo $view['placeName']; ?>"/><br/>
+                        <input style="border: none;outline: transparent;" id="place-id" name="place-id" type="hidden"
+                               value="<?php echo $view['placeId'] ?>"/><br/>
+                        <input style="border: none;outline: transparent;" id="place-address" name="place-address"
+                               value="<?php echo $view['wr_3']; ?>"/>
                     </div>
-                    <div style="background-color:#f9f9f9; width:100%; margin-top:5px; height:330px; border-radius:4px;" id="map"></div>
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1_JwwLDgIU_joX06TBJrI4BN2msur5Xg&callback=initMap&libraries=places&v=weekly" defer></script>
+                    <div style="background-color:#f9f9f9; width:100%; margin-top:5px; height:330px; border-radius:4px;"
+                         id="map"></div>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1_JwwLDgIU_joX06TBJrI4BN2msur5Xg&callback=initMap&libraries=places&v=weekly"
+                            defer></script>
                     <script>
                         function initMap() {
-                            const uluru = { lat: <?php echo $view['wr_1']!= '' ? $view['wr_1']: 12.97;?>, lng: <?php echo $view['wr_2']?$view['wr_2']: 77.59 ; ?>}
+                            const uluru = {
+                                lat: <?php echo $view['wr_1'] != '' ? $view['wr_1'] : 12.97;?>,
+                                lng: <?php echo $view['wr_2'] ? $view['wr_2'] : 77.59; ?>}
                             // The map, centered at Uluru
                             const map = new google.maps.Map(document.getElementById("map"), {
                                 zoom: 15,
@@ -189,7 +217,7 @@ add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">
                                 position: uluru,
                                 map: map,
                             });
-                            if (placeName!='') {
+                            if (placeName != '') {
                                 const infowindow = new google.maps.InfoWindow();
                                 const infowindowContent = document.getElementById("infowindow-content");
                                 infowindow.setContent(infowindowContent);
@@ -201,12 +229,15 @@ add_stylesheet('<link rel="stylesheet" href="' . $board_skin_url . '/style.css">
                         .title {
                             font-weight: bold;
                         }
+
                         #infowindow-content {
                             display: none;
                         }
+
                         #infowindow-content input {
                             min-width: 300px;
                         }
+
                         #map #infowindow-content {
                             display: inline;
                         }
