@@ -249,7 +249,7 @@ include_once(G5_SHOP_PATH.'/settle_naverpay.inc.php');
 
     <?php
     // 상품 구입폼
-    include_once($skin_dir.'/item.form.skin.php');
+    include_once($skin_dir.'/item.form.skin.php')
     ?>
 
 <!--    map api-->
