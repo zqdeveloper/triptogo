@@ -1698,7 +1698,7 @@ if (!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false
                     <col class="grid_3">
                 </colgroup>
                 <tbody>
-                <?php for ($i = 6; $i <= 10; $i++) { ?>
+                <?php for ($i = 7; $i <= 10; $i++) { ?>
                     <tr>
                         <th scope="row">여분필드<?php echo $i ?></th>
                         <td class="td_extra">
@@ -1921,6 +1921,15 @@ if (!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false
                             echo 'checked';
                         }?>>
                         <p style="margin:5px 0 0 0;">해외 배 송</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="wr_tags_input">配送日期</label></th>
+                    <td>
+                        <input type="checkbox" name="it_6" id="it_6" class="frm_input" size="50" <?php
+                            if ($it['it_6']=='on') {
+                                echo 'checked';
+                            } ?>>
                     </td>
                 </tr>
                 <?php if ($w == "u") { ?>
